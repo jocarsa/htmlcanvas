@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+    <head>
+    </head>
+    <body>
+        <canvas></canvas>
+        <script>
+            var anchura = 512;
+            var altura = anchura;
+            var radio = anchura/2-30;
+            
+            const lienzo = document.querySelector("canvas");
+            const contexto = lienzo.getContext("2d");
+            
+            lienzo.width = anchura;
+            lienzo.height = altura;
+            
+            lienzo.style.border = "1px solid grey";
+            
+            contexto.beginPath();
+            contexto.moveTo(anchura/2,altura/2);
+            contexto.lineTo(anchura/2+radio,altura/2);
+            contexto.arc(anchura/2,altura/2,radio,0,1)
+            contexto.stroke();
+        </script>
+    </body>
+</html>

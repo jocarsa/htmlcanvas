@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+    <head>
+    </head>
+    <body>
+        <canvas></canvas>
+        <script>
+            var anchura = 512;                                  // Defino una anchura
+            var altura = anchura;                               // La altura es igual a la anchura
+            var radio = anchura/2-30;                           // Defino el radio un poco menor para tener margen
+            
+            const lienzo = document.querySelector("canvas");    // Llamo al lienzo
+            const contexto = lienzo.getContext("2d");           // Dibujo en 2D
+            
+            lienzo.width = anchura;                             // Le pongo la anchura al lienzo
+            lienzo.height = altura;                             // Le pongo la altura al lienzo
+            
+            lienzo.style.border = "1px solid grey";             // Le pongo un borde al lienzo para verlo
+            
+            contexto.fillStyle = "red"                          // Voy a pintar de color rojo
+            
+            contexto.beginPath();                               // Inicio el trazo
+            contexto.moveTo(anchura/2,altura/2);                // Muevo el cursor al centro
+            contexto.lineTo(anchura/2+radio,altura/2);          // Creo una cuerda de radio
+            contexto.arc(anchura/2,altura/2,radio,0,1);         // Trazo el arco
+            contexto.lineTo(anchura/2,altura/2);                // Linea de nuevo hasta el centro
+            contexto.fill();                                    // Y relleno
+        </script>
+    </body>
+</html>
