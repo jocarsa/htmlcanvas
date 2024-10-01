@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+    <head>
+    </head>
+    <body>
+        <canvas></canvas>
+        <script>
+            let anchura = 512
+            let altura = anchura
+            const lienzo = document.querySelector("canvas")
+            const contexto = lienzo.getContext("2d")
+            
+            lienzo.width = anchura
+            lienzo.height = altura
+            
+            let imagen = new Image();
+            imagen.src = "josevicente.jpg";
+            imagen.onload = function(){
+                contexto.drawImage(imagen,0,0)
+                let color = contexto.getImageData(0,0,1,1);
+                console.log(color.data)
+            }
+                                
+        </script>
+    </body>
+</html>

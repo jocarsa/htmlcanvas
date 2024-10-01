@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+    <head>
+    </head>
+    <body>
+        <canvas></canvas>
+        <script>
+            let anchura = 512                                   // Defino la anchura del lienzo
+            let altura = anchura                                // En este caso la anchura es la misma que la altura
+            const lienzo = document.querySelector("canvas")     // Selecciono el lienzo
+            const contexto = lienzo.getContext("2d")            // Creo un contexto 2d
+            
+            lienzo.width = anchura                              // Al lienzo le pongo la anchura
+            lienzo.height = altura                              // Al lienzo le pongo la altura
+            
+            let imagen = new Image();                           // Creo un nuevo objeto imagen
+            imagen.src = "josevicente.jpg";                     // Le indico la imagen real en el disco duro
+            imagen.onload = function(){                         // Solo cuando imagen haya cargado
+                contexto.drawImage(imagen,0,0)                  // Pinto la imagen en el contexto
+                let color = contexto.getImageData(0,0,512,512); // Cargo el color de todos los pixeles del lienzo
+                for(let i = 0;i<color.data.length;i+=4){        // Para cada uno de los pixeles (saltos de 4)
+                    color.data[i] = 255 - color.data[i]         // Invierto el canal rojo
+                    color.data[i+1] = 255 - color.data[i+1]     // Invierto el canal verde
+                    color.data[i+2] = 255 - color.data[i+2]     // Invierto el canal azul
+                }
+                contexto.putImageData(color,0,0)                // Pongo la imagen en el sitio
+            }
+                                
+        </script>
+    </body>
+</html>

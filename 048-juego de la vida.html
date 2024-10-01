@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+    <head>
+    </head>
+    <body>
+        <canvas></canvas>
+        <script>
+            let anchura = 128                                   // Defino la anchura del lienzo
+            let altura = anchura                                // En este caso la anchura es la misma que la altura
+            const lienzo = document.querySelector("canvas")     // Selecciono el lienzo
+            const contexto = lienzo.getContext("2d")            // Creo un contexto 2d
+            
+            lienzo.width = anchura                              // Al lienzo le pongo la anchura
+            lienzo.height = altura                              // Al lienzo le pongo la altura
+            
+            lienzo.style.border = "1px solid grey";
+                                
+        </script>
+    </body>
+</html>

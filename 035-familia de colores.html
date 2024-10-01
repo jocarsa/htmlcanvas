@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+    <head>
+    </head>
+    <body>
+        <div id="contenedor"></div>
+        <script>
+            function grafica(contenedor,datos){
+                let colores =  []
+                let colorbase = [145,125,23]
+                for(let i = 0;i<100;i++){
+                    let rojo = Math.abs(colorbase[0] + (Math.random()-0.5)*100)
+                    let verde = Math.abs(colorbase[1] + (Math.random()-0.5)*100)
+                    let azul = Math.abs(colorbase[2] + (Math.random()-0.5)*100)
+                    colores.push("rgb("+rojo+","+verde+","+azul+")")
+                }
+                
+                let suma = 0;
+                Object.keys(datos).forEach(clave => {
+                  suma += datos[clave]
+                });
+                console.log(suma);
+
+                let anchura = 512;                                  // Defino una anchura
+                let altura = anchura;                               // La altura es igual a la anchura
+                let radio = anchura/2-30;                           // Defino el radio un poco menor para tener margen
+
+                const lienzo = document.createElement("canvas");    // Llamo al lienzo
+                const contexto = lienzo.getContext("2d");           // Dibujo en 2D
+
+                lienzo.width = anchura;                             // Le pongo la anchura al lienzo
+                lienzo.height = altura;                             // Le pongo la altura al lienzo
+
+                lienzo.style.border = "1px solid grey";             // Le pongo un borde al lienzo para verlo
+
+                let cursor = 0
+                let contador = 1;
+                Object.keys(datos).forEach(clave => {               // Para cada uno de los elementos del json
+
+                    contexto.fillStyle = colores[contador]                          // Voy a pintar de color rojo
+
+                    let inicio = cursor                             // El inicio es el angulo en el que empiezo
+                    let final = cursor + (datos[clave]/suma)*Math.PI*2  // El final es el angulo en el que acabo
+                    cursor += (datos[clave]/suma)*Math.PI*2             // Actualizo el cursor para que el principio del siguiente angulo sea el final del angulo anterior
+
+                    contexto.beginPath();                               // Inicio el trazo
+                    contexto.moveTo(anchura/2,altura/2);                // Muevo el cursor al centro
+                    contexto.arc(anchura/2,altura/2,radio,inicio,final); // Trazo el arco
+
+                    contexto.fill();                                    // Y relleno
+                    contador++;
+
+                });
+                document.getElementById(contenedor).appendChild(lienzo)
+            }
+            
+            let datos = {
+                    "uno":45,
+                    "dos":34,
+                    "tres":67,
+                    "cuatro":45,
+                    "cinco":65
+                }
+            
+            grafica("contenedor",datos);
+            
+            datos = {
+                    "uno":23,
+                    "dos":87,
+                    "tres":56,
+                    "cuatro":98,
+                    "cinco":23
+                }
+            
+            grafica("contenedor",datos);
+                                
+        </script>
+    </body>
+</html>
